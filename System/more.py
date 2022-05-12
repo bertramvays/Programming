@@ -15,3 +15,4 @@ if __name__ == '__main__':
         more(sys.stdin.read())
     else:
         more(open(sys.argv[1]).read())
+        
