@@ -18,12 +18,12 @@ def spawn(prog, *args):  # имя программы, аргументы ком�
         os.close(childStdout)  # в родительском после ветвления:
         os.close(childStdin)   # закрыть дочерние концы в родителе
         os.dup2(parentStdin, stdinFd)  # копия sys.stdin = pipe1[0]
-        os.dup2(childStdout, stdoutFd)  # копия sys.stdout = pipe2[1]
+        os.dup2(parentStdout, stdoutFd)  # копия sys.stdout = pipe2[1]
     else:
         os.close(parentStdin)  # в дочернем после ветвления:
         os.close(parentStdout)  # закрыть родительские концы
         os.dup2(childStdin, stdinFd)  # копия sys.stdin = pipe2[0]
-        os.dup2(parentStdout, stdoutFd)  # копия sys.stdout = pipe1[1]
+        os.dup2(childStdout, stdoutFd)  # копия sys.stdout = pipe1[1]
         args = (prog,) + args
         os.execvp(prog, args)  # запустить новую программу
         assert False, 'execvp failed!'  # os.exec никогда не вернеться сюда
