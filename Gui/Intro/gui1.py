@@ -1,6 +1,5 @@
-from tkinter import Label  # ипортировать виджет
+from tkinter import *
 
 
-widget = Label(None, text='Hello GUI world!')  # создать его
-widget.pack()  # разместить
-widget.mainloop()  # запустить цикл событий
+Label(text='Hello GUI world!').pack(expand=YES, fill=BOTH)
+mainloop()
